@@ -32,3 +32,24 @@ console.log(isPalindrome('Лёша на полке клопа нашёл')); // 
 console.log(isPalindrome('Маша на полке клопа нашлф')); // false
 console.log(isPalindrome('А роза упала на лапу Азора')); // true
 
+
+function isMeetingWithinWorkHours (startOfDay, endOfDay, meetingStart, meetingDuration) {
+
+  const timeToMinutes = (time) => {
+    const [hours, minutes] = time.split(':').map(Number);
+    return hours * 60 + minutes;
+  };
+
+  const workStart = timeToMinutes(startOfDay);
+  const workEnd = timeToMinutes(endOfDay);
+  const meetingStartInMinutes = timeToMinutes(meetingStart);
+  const meetingEndInMinutes = meetingStartInMinutes + meetingDuration;
+
+  return meetingStartInMinutes >= workStart && meetingEndInMinutes <= workEnd;
+}
+
+console.log(isMeetingWithinWorkHours('08:00', '17:30', '14:00', 90)); // true
+console.log(isMeetingWithinWorkHours('8:0', '10:0', '8:0', 120)); // true
+console.log(isMeetingWithinWorkHours('08:00', '14:30', '14:00', 90)); // false
+console.log(isMeetingWithinWorkHours('14:00', '17:30', '08:0', 90)); // false
+console.log(isMeetingWithinWorkHours('8:00', '17:30', '08:00', 900)); // false

@@ -1,6 +1,4 @@
-import {getRandomInteger} from './util.js';
-import {makeUniqueId} from './util.js';
-import {getRandomArrayElement} from './util.js';
+import {getRandomInteger, makeUniqueId, getRandomArrayElement} from './util.js';
 
 const NAMES = [
   'Алексей',
@@ -59,5 +57,4 @@ function generatePhotos() {
   return photos;
 }
 
-// eslint-disable-next-line no-console
-console.log(generatePhotos());
+export {generatePhotos};
