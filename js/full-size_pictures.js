@@ -34,12 +34,6 @@ const renderingPictureData = ({url, likes, description}) => {
   bigPictureElement.querySelector('.social__caption').textContent = description;
 };
 
-const onDocumentKeydown = (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeBigPicture();
-  }
-};
 
 const openBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
@@ -57,6 +51,13 @@ const closeBigPicture = () => {
   bodyElement.classList.remove('modal-open');
   document.removeEventListener('keydown', onDocumentKeydown);
 };
+
+function onDocumentKeydown(evt) {
+  if (isEscapeKey(evt)) {
+    evt.preventDefault();
+    closeBigPicture();
+  }
+}
 
 bigPictureCloseElement.addEventListener('click', closeBigPicture);
 
