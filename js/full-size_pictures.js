@@ -2,7 +2,7 @@ import {isEscapeKey} from './util.js';
 
 const COMMENTS_TO_SHOW = 5;
 
-const bodyElement = document.querySelector('body');
+const body = document.querySelector('body');
 const bigPictureElement = document.querySelector('.big-picture');
 const commentElement = document.querySelector('.social__comment');
 const commentListElement = bigPictureElement.querySelector('.social__comments');
@@ -48,7 +48,7 @@ const renderingPictureData = ({url, likes, description}) => {
 
 const openBigPicture = (data) => {
   bigPictureElement.classList.remove('hidden');
-  bodyElement.classList.add('modal-open');
+  body.classList.add('modal-open');
   commentsLoaderElement.classList.remove('hidden');
 
   currentCommentCount = 0;
@@ -65,7 +65,7 @@ const openBigPicture = (data) => {
 
 const closeBigPicture = () => {
   bigPictureElement.classList.add('hidden');
-  bodyElement.classList.remove('modal-open');
+  body.classList.remove('modal-open');
   commentsLoaderElement.onclick = null;
   document.removeEventListener('keydown', onDocumentKeydown);
 };

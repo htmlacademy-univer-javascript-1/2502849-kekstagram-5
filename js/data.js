@@ -24,6 +24,8 @@ const DESCRIPTIONS = [
   'Желаю счастья'
 ];
 
+const COUNT_PHOTOS = 25;
+
 function generateComments() {
   const comments = [];
   const countComments = getRandomInteger(0,30);
@@ -41,7 +43,7 @@ function generateComments() {
 function generatePhotos() {
   const photos = [];
 
-  for (let i = 1; i <= 25; i++) {
+  for (let i = 1; i <= COUNT_PHOTOS; i++) {
     photos.push ({
       id: i,
       url: `photos/${i}.jpg`,
