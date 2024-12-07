@@ -1,4 +1,6 @@
-import { isEscapeKey } from './util.js';
+import {isEscapeKey} from './util.js';
+import {resetScale} from './scale.js';
+import {resetFilters} from './filters.js';
 
 const HASHTAGS_MAX_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-я0-9]{1,19}|^$/i;
@@ -8,7 +10,6 @@ const HASHTAG_ERROR_MESSAGE = {
   hashtagsMaxCount:`Максимальное количество хеш-тегов - ${HASHTAGS_MAX_COUNT}`
 };
 const CHARACTERS_MAX_COUNT = 140;
-
 
 const body = document.querySelector('body');
 const form = document.querySelector('.img-upload__form');
@@ -52,7 +53,8 @@ const onDocumentKeydown = (evt) => {
 function openUploadForm() {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.remove('modal-open');
-
+  resetScale();
+  resetFilters();
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
