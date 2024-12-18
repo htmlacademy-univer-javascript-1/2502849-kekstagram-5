@@ -1,6 +1,8 @@
 import {isEscapeKey} from './util.js';
 import {resetScale} from './scale.js';
 import {resetFilters} from './filters.js';
+import {setPhoto} from './fetch.js';
+import {showError, showSuccess} from './message.js';
 
 const HASHTAGS_MAX_COUNT = 5;
 const VALID_HASHTAG = /^#[a-zа-я0-9]{1,19}|^$/i;
@@ -18,7 +20,7 @@ const closeUploadFormButton = document.querySelector('.img-upload__cancel');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
 const hashtagInput = document.querySelector('.text__hashtags');
 const descriptionInput = document.querySelector('.text__description');
-
+const submitFormButton = document.querySelector('.img-upload__submit');
 
 const pristine = new Pristine(form, {
   classTo: 'img-upload__field-wrapper',
@@ -50,6 +52,26 @@ const onDocumentKeydown = (evt) => {
   }
 };
 
+function onSubmite(evt) {
+  evt.preventDefault();
+  submitFormButton.disabled = true;
+
+  if (pristine.validate()) {
+    setPhoto(
+      () => {
+        showSuccess();
+        openUploadForm();
+        submitFormButton.disabled = false;
+      },
+      () => {
+        showError();
+        submitFormButton.disabled = false;
+      },
+      new FormData(form)
+    );
+  }
+}
+
 function openUploadForm() {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.remove('modal-open');
@@ -75,4 +97,5 @@ function onCloseUploadForm() {
 }
 
 uploadInput.addEventListener('change', onOpenUploadForm);
+submitFormButton.addEventListener('click', onSubmite);
 closeUploadFormButton.addEventListener('click', onCloseUploadForm);
