@@ -11,7 +11,6 @@ const commentCountElement = bigPictureElement.querySelector('.social__comment-co
 const bigPictureCloseElement = bigPictureElement.querySelector('.big-picture__cancel');
 let currentCommentCount = 0;
 
-
 const createComment = ({avatar, name, message}) => {
   const comment = commentElement.cloneNode(true);
   comment.querySelector('.social__picture').src = avatar;
@@ -21,7 +20,7 @@ const createComment = ({avatar, name, message}) => {
   return comment;
 };
 
-const renderingComments = (comments) => {
+const renderComments = (comments) => {
   const lastIndex = Math.min(currentCommentCount + COMMENTS_TO_SHOW, comments.length);
 
   const fragment = document.createDocumentFragment();
@@ -39,7 +38,7 @@ const renderingComments = (comments) => {
   }
 };
 
-const renderingPictureData = ({url, likes, description}) => {
+const renderPictureData = ({url, likes, description}) => {
   bigPictureElement.querySelector('.big-picture__img img').src = url;
   bigPictureElement.querySelector('.big-picture__img img').alt = description;
   bigPictureElement.querySelector('.likes-count').textContent = likes;
@@ -52,12 +51,12 @@ const openBigPicture = (data) => {
   commentsLoaderElement.classList.remove('hidden');
 
   currentCommentCount = 0;
-  renderingPictureData(data);
+  renderPictureData(data);
   commentListElement.innerHTML = '';
-  renderingComments(data.comments);
+  renderComments(data.comments);
 
   commentsLoaderElement.onclick = () => {
-    renderingComments(data.comments);
+    renderComments(data.comments);
   };
 
   document.addEventListener('keydown', onDocumentKeydown);
@@ -82,6 +81,5 @@ const onCloseBigPicture = () => {
 };
 
 bigPictureCloseElement.addEventListener('click', onCloseBigPicture);
-
 
 export {openBigPicture};
