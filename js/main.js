@@ -1,2 +1,2 @@
 import './form.js';
-import'./thumbnails.js';
+import './filtering.js';
