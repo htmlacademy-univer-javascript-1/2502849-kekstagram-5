@@ -1,6 +1,6 @@
 import {isEscapeKey} from './util.js';
 import {resetScale} from './scale.js';
-import {resetFilters} from './filters.js';
+import {resetEffects} from './effects.js';
 import {setPhoto} from './fetch.js';
 import {showError, showSuccess} from './message.js';
 
@@ -76,7 +76,7 @@ function openUploadForm() {
   imgUploadOverlay.classList.remove('hidden');
   body.classList.remove('modal-open');
   resetScale();
-  resetFilters();
+  resetEffects();
   document.addEventListener('keydown', onDocumentKeydown);
 }
 
