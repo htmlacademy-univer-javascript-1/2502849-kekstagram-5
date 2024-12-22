@@ -1,2 +1,2 @@
 import './form.js';
-import './filtering.js';
+import './filter.js';
