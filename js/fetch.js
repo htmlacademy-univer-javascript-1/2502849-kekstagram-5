@@ -1,5 +1,6 @@
 const BASE_URL = 'https://29.javascript.htmlacademy.pro/kekstagram';
 
+
 const getPhotos = (onLoad, onFail) => {
   fetch(`${BASE_URL}/data`)
     .then((response) => {
