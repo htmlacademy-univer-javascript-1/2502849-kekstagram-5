@@ -4,18 +4,14 @@ const body = document.querySelector('body');
 
 
 const closeMessage = (evt, messageClass) => {
-  const isClick = evt.type === 'click';
-  const isKeydown = evt.type === 'keydown' && isEscapeKey(evt);
-
-  if (isClick || isKeydown) {
+  if (evt.type === 'click' || isEscapeKey(evt)) {
     const message = document.querySelector(messageClass);
-
     if (message) {
-      if (isClick && (evt.target.classList.contains(`${messageClass.slice(1)}__button`) || !evt.target.classList.contains(`${messageClass.slice(1)}__inner`))) {
+      if ((evt.type === 'click') && (evt.target.classList.contains(`${messageClass.slice(1)}__button`) || !evt.target.classList.contains(`${messageClass.slice(1)}__inner`))) {
         body.removeEventListener('click', closeMessage);
         body.removeEventListener('keydown', closeMessage);
         message.remove();
-      } else if (isKeydown) {
+      } else if (isEscapeKey(evt)) {
         body.removeEventListener('click', closeMessage);
         body.removeEventListener('keydown', closeMessage);
         message.remove();
@@ -37,6 +33,17 @@ const showLoadError = () => {
   document.body.append(showAlertElement);
 };
 
+const showLoadFormError = () => {
+  const showAlertElement = document.createElement('div');
+  showAlertElement.classList.add('load_error');
+  showAlertElement.textContent = 'Не удалось отправить форму. Пожалуйста, исправьте некорректные значения и попробуйте снова';
+  document.body.append(showAlertElement);
+
+  setTimeout(() => {
+    showAlertElement.remove();
+  }, 5000);
+};
+
 const showSuccess = () => {
   body.addEventListener('keydown', (evt) => closeMessage(evt, '.success'));
   body.addEventListener('click', (evt) => closeMessage(evt, '.success'));
@@ -49,4 +56,4 @@ const showError = () => {
   showMessage('#error');
 };
 
-export {showLoadError, showSuccess, showError};
+export {showLoadError, showLoadFormError, showSuccess, showError};
