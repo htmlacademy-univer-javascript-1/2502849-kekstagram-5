@@ -40,7 +40,7 @@ pristine.addValidator(hashtagInput, isHashtagsUnique, HashtagErrorMessage.REPLAY
 pristine.addValidator(hashtagInput, isHashtagsLimited, HashtagErrorMessage.HASHTAGS_MAX_COUNT);
 pristine.addValidator(descriptionInput, (value) => value.length <= CHARACTERS_MAX_COUNT, HashtagErrorMessage.MAX_COMMENT_LENGTH);
 
-const validatePristine = () => pristine.validate();
+const onValidatePristine = () => pristine.validate();
 
 const openUploadForm = () => {
   imgUploadOverlay.classList.remove('hidden');
@@ -96,8 +96,8 @@ function onDocumentKeydown (evt) {
   }
 }
 
-hashtagInput.addEventListener('change', validatePristine);
-descriptionInput.addEventListener('change', validatePristine);
+hashtagInput.addEventListener('change', onValidatePristine);
+descriptionInput.addEventListener('change', onValidatePristine);
 uploadInput.addEventListener('change', onOpenUploadForm);
 submitFormButton.addEventListener('click', onSubmit);
 closeUploadFormButton.addEventListener('click', onCloseUploadForm);
